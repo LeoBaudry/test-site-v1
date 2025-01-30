@@ -15,7 +15,22 @@ export default {
     plugins: [],
   }
 
-
+  module.exports = {
+    content: ['./src/**/*.{astro,html,js,jsx,ts,tsx}'],
+    theme: {
+      extend: {
+        colors: {
+          beige: '#f5f5dc',
+          lightOrange: '#ffd699',
+          red: '#ff4d4d',
+          green: '#66cc99',
+          blue: '#6699cc',
+          darkOrange: '#cc6600',
+        },
+      },
+    },
+    plugins: [],
+  };
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {

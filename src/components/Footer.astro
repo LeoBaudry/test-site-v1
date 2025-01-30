@@ -1,0 +1,12 @@
+---
+// src/components/Footer.astro
+const { image, category } = Astro.props;
+---
+
+<footer class="bg-black text-white py-8">
+  <!-- Image représentative -->
+  <div class="container mx-auto text-center">
+    <img src={image} alt={`${category} cuisine`} class="w-32 h-32 mx-auto mb-4" />
+    <p class="text-sm">© 2023 Yumly. Tous droits réservés.</p>
+  </div>
+</footer>
