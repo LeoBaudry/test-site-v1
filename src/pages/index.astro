@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Yumly - Discover Ethnic Grocery Stores">
+  <main class="flex h-[85vh] w-full bg-[#F5F5F1]">
+    <!-- Asia Column -->
+    <div 
+      x-data="{ expanded: false }"
+      @mouseenter="expanded = true"
+      @mouseleave="expanded = false"
+      :class="expanded ? 'w-[90%] transition-all duration-500' : 'w-1/4 transition-all duration-500'"
+      class="relative h-full overflow-hidden group"
+    >
+      <a href="/asia" class="block h-full w-full">
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500"></div>
+        <img 
+          src="/images/asia-bg.jpg" 
+          alt="Asian cuisine" 
+          class="object-cover h-full w-full"
+        />
+        <div class="absolute inset-0 flex items-center justify-center">
+          <h2 class="text-white text-5xl font-bold tracking-wider transform -rotate-90 group-hover:rotate-0 transition-all duration-500">ASIA</h2>
+        </div>
+      </a>
+    </div>
+
+    <!-- Africa Column -->
+    <div 
+      x-data="{ expanded: false }"
+      @mouseenter="expanded = true"
+      @mouseleave="expanded = false"
+      :class="expanded ? 'w-[90%] transition-all duration-500' : 'w-1/4 transition-all duration-500'"
+      class="relative h-full overflow-hidden group"
+    >
+      <a href="/africa" class="block h-full w-full">
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500"></div>
+        <img 
+          src="/images/africa-bg.jpg" 
+          alt="African cuisine" 
+          class="object-cover h-full w-full"
+        />
+        <div class="absolute inset-0 flex items-center justify-center">
+          <h2 class="text-white text-5xl font-bold tracking-wider transform -rotate-90 group-hover:rotate-0 transition-all duration-500">AFRICA</h2>
+        </div>
+      </a>
+    </div>
+
+    <!-- Latino Column -->
+    <div 
+      x-data="{ expanded: false }"
+      @mouseenter="expanded = true"
+      @mouseleave="expanded = false"
+      :class="expanded ? 'w-[90%] transition-all duration-500' : 'w-1/4 transition-all duration-500'"
+      class="relative h-full overflow-hidden group"
+    >
+      <a href="/latino" class="block h-full w-full">
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500"></div>
+        <img 
+          src="/images/latino-bg.jpg" 
+          alt="Latino cuisine" 
+          class="object-cover h-full w-full"
+        />
+        <div class="absolute inset-0 flex items-center justify-center">
+          <h2 class="text-white text-5xl font-bold tracking-wider transform -rotate-90 group-hover:rotate-0 transition-all duration-500">LATINO</h2>
+        </div>
+      </a>
+    </div>
+
+    <!-- Europe Column -->
+    <div 
+      x-data="{ expanded: false }"
+      @mouseenter="expanded = true"
+      @mouseleave="expanded = false"
+      :class="expanded ? 'w-[90%] transition-all duration-500' : 'w-1/4 transition-all duration-500'"
+      class="relative h-full overflow-hidden group"
+    >
+      <a href="/europe" class="block h-full w-full">
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500"></div>
+        <img 
+          src="/images/europe-bg.jpg" 
+          alt="European cuisine" 
+          class="object-cover h-full w-full"
+        />
+        <div class="absolute inset-0 flex items-center justify-center">
+          <h2 class="text-white text-5xl font-bold tracking-wider transform -rotate-90 group-hover:rotate-0 transition-all duration-500">EUROPE</h2>
+        </div>
+      </a>
+    </div>
+  </main>
+</Layout>
