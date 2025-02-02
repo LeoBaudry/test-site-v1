@@ -1,6 +1,7 @@
 ---
 // src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
+import RecipeCard from '../components/RecipeCard.astro';
 
 const regions = [
   { name: "ASIA", image: "/asie1.jpg", link: "/asia" },
@@ -8,13 +9,59 @@ const regions = [
   { name: "LATINO", image: "/latino1.jpg", link: "/latino" },
   { name: "EUROPE", image: "/europe1.jpg", link: "/europe" },
 ];
+
+// Sample data for featured sections
+const featuredStores = [
+  {
+    name: "Asian Market Express",
+    image: "./public/placeholder_img_1.webp",
+    location: "Paris, France",
+    category: "Asia"
+  },
+  {
+    name: "African Flavors",
+    image: "./public/placeholder_img_1.webp",
+    location: "Lyon, France",
+    category: "Africa"
+  },
+  {
+    name: "Latino Mercado",
+    image: "./public/placeholder_img_1.webp",
+    location: "Marseille, France",
+    category: "Latino"
+  },
+];
+
+const popularRecipes = [
+  {
+    title: "Traditional Pad Thai",
+    description: "Authentic Thai street food classic",
+    image: "./public/placeholder_img_1.webp",
+    ingredients: ["Rice noodles", "Tofu", "Bean sprouts", "Peanuts"],
+    time: "30 mins"
+  },
+  {
+    title: "Moroccan Tagine",
+    description: "Slow-cooked aromatic dish",
+    image: "./public/placeholder_img_1.webp",
+    ingredients: ["Lamb", "Apricots", "Couscous", "Spices"],
+    time: "2 hours"
+  },
+  {
+    title: "Homemade Paella",
+    description: "Classic Spanish rice dish",
+    image: "./public/placeholder_img_1.webp",
+    ingredients: ["Rice", "Seafood", "Saffron", "Vegetables"],
+    time: "45 mins"
+  }
+];
 ---
 
 <Layout title="Yumly - Discover Ethnic Grocery Stores">
-  <!-- Contenu principal -->
-  <main class="flex flex-col lg:flex-row h-[85vh] w-full bg-[#F5F5F1]">
+  <!-- Existing hero section with columns -->
+  <main class="flex flex-col bg-[#F5F5F1]">
     <!-- Grid pour les écrans mobiles -->
-    <div class="lg:hidden grid grid-cols-2 gap-0 h-full w-full">
+    <div class="lg:hidden grid grid-cols-2 gap-0 h-[85vh] w-full">
       {regions.map((region) => (
         <div 
           x-data="{ expanded: false }"
@@ -24,7 +71,7 @@ const regions = [
         >
           <a href={region.link} class="block h-full w-full">
             <img 
-              src={region.image} 
+              src={region.image || "/placeholder.svg"} 
               alt={`${region.name} cuisine`} 
               class="object-cover h-full w-full"
             />
@@ -40,8 +87,7 @@ const regions = [
     </div>
 
     <!-- Disposition originale pour les écrans larges (lg et plus) -->
-
-    <div class="hidden lg:flex flex-row h-full w-full">
+    <div class="hidden lg:flex flex-row h-[85vh] w-full">
       {regions.map((region) => (
         <div 
           x-data="{ expanded: false }"
@@ -52,7 +98,7 @@ const regions = [
         >
           <a href={region.link} class="block h-full w-full">
             <img 
-              src={region.image} 
+              src={region.image || "/placeholder.svg"} 
               alt={`${region.name} cuisine`} 
               class="object-cover h-full w-full"
             />
@@ -66,5 +112,76 @@ const regions = [
         </div>
       ))}
     </div>
+
+    <!-- New content sections -->
+    <div class="container mx-auto px-4 py-16 space-y-16">
+      <!-- Featured Stores Section -->
+      <section>
+        <h2 class="text-3xl font-bold mb-8 text-center">Featured Stores</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredStores.map((store) => (
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <img 
+                src={store.image || "/placeholder.svg"} 
+                alt={store.name}
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6">
+                <h3 class="font-bold text-xl mb-2">{store.name}</h3>
+                <p class="text-gray-600">{store.location}</p>
+                <span class="inline-block mt-2 px-3 py-1 text-sm font-semibold text-white rounded-full"
+                      class:list={[
+                        { 'bg-red-500': store.category === 'Asia' },
+                        { 'bg-green-500': store.category === 'Africa' },
+                        { 'bg-yellow-500': store.category === 'Latino' },
+                        { 'bg-blue-500': store.category === 'Europe' }
+                      ]}>
+                  {store.category}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Popular Recipes Section -->
+      <section>
+        <h2 class="text-3xl font-bold mb-8 text-center">Popular Recipes</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {popularRecipes.map((recipe) => (
+            <RecipeCard {...recipe} />
+          ))}
+        </div>
+      </section>
+
+      <!-- Newsletter Section -->
+      <section class="bg-orange-500 text-white rounded-lg p-8 md:p-12">
+        <div class="max-w-2xl mx-auto text-center">
+          <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+          <p class="mb-6">Subscribe to our newsletter for the latest updates on ethnic grocery stores and recipes near you.</p>
+          <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <input 
+              type="email" 
+              placeholder="Enter your email" 
+              class="flex-1 px-4 py-2 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-600"
+              required
+            />
+            <button 
+              type="submit"
+              class="px-6 py-2 bg-white text-orange-500 rounded-lg font-semibold hover:bg-orange-50 transition-colors"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </section>
+    </div>
   </main>
 </Layout>
+
+<style>
+  /* Add any additional styles here */
+  .container {
+    max-width: 1200px;
+  }
+</style>
