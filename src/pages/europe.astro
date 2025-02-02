@@ -1,0 +1,74 @@
+Page europe.astro
+astro
+Copy
+---
+import CategoryLayout from '../layouts/CategoryLayout.astro';
+import RecipeCard from '../components/RecipeCard.astro';
+
+const ingredients = [
+  {
+    name: "Truffle",
+    description: "Highly prized fungus used in European cuisine",
+    image: "/images/ingredients/truffle.jpg"
+  },
+  {
+    name: "Saffron",
+    description: "Exotic spice used in paella and risotto",
+    image: "/images/ingredients/saffron.jpg"
+  },
+  // Ajoutez plus d'ingrédients...
+];
+
+const recipes = [
+  {
+    title: "Paella",
+    description: "Spanish rice dish with seafood and chorizo",
+    image: "/images/recipes/paella.jpg",
+    ingredients: ["Rice", "Shrimp", "Chorizo", "Saffron"],
+    time: "1 hour"
+  },
+  {
+    title: "Ratatouille",
+    description: "French vegetable stew",
+    image: "/images/recipes/ratatouille.jpg",
+    ingredients: ["Eggplant", "Zucchini", "Tomatoes", "Herbs"],
+    time: "1 hour"
+  },
+  // Ajoutez plus de recettes...
+];
+---
+
+<CategoryLayout 
+  title="European Cuisine" 
+  category="europe" 
+  accentColor="bg-[#87CEEB]"
+  footerImage="/images/footer/european-dish.jpg"
+>
+  <section class="mb-16">
+    <h2 class="text-3xl font-bold mb-8">Essential European Ingredients</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      {ingredients.map(ingredient => (
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img 
+            src={ingredient.image || "/placeholder.svg"} 
+            alt={ingredient.name}
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="font-bold text-lg">{ingredient.name}</h3>
+            <p class="text-gray-600">{ingredient.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <h2 class="text-3xl font-bold mb-8">Featured Recipes</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {recipes.map(recipe => (
+        <RecipeCard {...recipe} />
+      ))}
+    </div>
+  </section>
+</CategoryLayout>

@@ -1,93 +1,70 @@
 ---
 // src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
+
+const regions = [
+  { name: "ASIA", image: "/asie1.jpg", link: "/asia" },
+  { name: "AFRICA", image: "/africa1.jpg", link: "/africa" },
+  { name: "LATINO", image: "/latino1.jpg", link: "/latino" },
+  { name: "EUROPE", image: "/europe1.jpg", link: "/europe" },
+];
 ---
 
 <Layout title="Yumly - Discover Ethnic Grocery Stores">
   <!-- Contenu principal -->
-  <main class="flex h-[85vh] w-full bg-[#F5F5F1]">
-    <!-- Asia Column -->
-    <div 
-      x-data="{ expanded: false }"
-      @mouseenter="expanded = true"
-      @mouseleave="expanded = false"
-      :class="expanded ? 'w-[90%] transition-all duration-500' : 'w-1/4 transition-all duration-500'"
-      class="relative h-full overflow-hidden group"
-    >
-      <a href="/asia" class="block h-full w-full">
-        <!-- Image pour Asia -->
-        <img 
-          src="/asie1.jpg" 
-          alt="Asian cuisine" 
-          class="object-cover h-full w-full"
-        />
-        <div class="absolute inset-0 flex items-center justify-center">
-          <h2 class="text-white text-5xl font-bold tracking-wider transform -rotate-90 group-hover:rotate-0 transition-all duration-500">ASIA</h2>
+  <main class="flex flex-col lg:flex-row h-[85vh] w-full bg-[#F5F5F1]">
+    <!-- Grid pour les écrans mobiles -->
+    <div class="lg:hidden grid grid-cols-2 gap-0 h-full w-full">
+      {regions.map((region) => (
+        <div 
+          x-data="{ expanded: false }"
+          @mouseenter="expanded = true"
+          @mouseleave="expanded = false"
+          class="relative h-full w-full overflow-hidden group"
+        >
+          <a href={region.link} class="block h-full w-full">
+            <img 
+              src={region.image} 
+              alt={`${region.name} cuisine`} 
+              class="object-cover h-full w-full"
+            />
+            <div class="absolute inset-0 flex items-center justify-center">
+              <h2 class="text-white font-bold tracking-wider"
+                  style="font-size: clamp(1.5rem, 6vw, 3rem); text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">
+                {region.name}
+              </h2>
+            </div>
+          </a>
         </div>
-      </a>
+      ))}
     </div>
 
-    <!-- Africa Column -->
-    <div 
-      x-data="{ expanded: false }"
-      @mouseenter="expanded = true"
-      @mouseleave="expanded = false"
-      :class="expanded ? 'w-[90%] transition-all duration-500' : 'w-1/4 transition-all duration-500'"
-      class="relative h-full overflow-hidden group"
-    >
-      <a href="/africa" class="block h-full w-full">
-        <!-- Image pour Africa -->
-        <img 
-          src="/africa1.jpg" 
-          alt="African cuisine" 
-          class="object-cover h-full w-full"
-        />
-        <div class="absolute inset-0 flex items-center justify-center">
-          <h2 class="text-white text-5xl font-bold tracking-wider transform -rotate-90 group-hover:rotate-0 transition-all duration-500">AFRICA</h2>
-        </div>
-      </a>
-    </div>
+    <!-- Disposition originale pour les écrans larges (lg et plus) -->
 
-    <!-- Latino Column -->
-    <div 
-      x-data="{ expanded: false }"
-      @mouseenter="expanded = true"
-      @mouseleave="expanded = false"
-      :class="expanded ? 'w-[90%] transition-all duration-500' : 'w-1/4 transition-all duration-500'"
-      class="relative h-full overflow-hidden group"
-    >
-      <a href="/latino" class="block h-full w-full">
-        <!-- Image pour Latino -->
-        <img 
-          src="/latino1.jpg" 
-          alt="Latino cuisine" 
-          class="object-cover h-full w-full"
-        />
-        <div class="absolute inset-0 flex items-center justify-center">
-          <h2 class="text-white text-5xl font-bold tracking-wider transform -rotate-90 group-hover:rotate-0 transition-all duration-500">LATINO</h2>
+    <div class="hidden lg:flex flex-row h-full w-full">
+      {regions.map((region) => (
+        <div 
+          x-data="{ expanded: false }"
+          @mouseenter="expanded = true"
+          @mouseleave="expanded = false"
+          :class="expanded ? 'lg:w-[90%] transition-all duration-500' : 'lg:w-1/4 transition-all duration-500'"
+          class="relative h-full w-1/4 overflow-hidden group"
+        >
+          <a href={region.link} class="block h-full w-full">
+            <img 
+              src={region.image} 
+              alt={`${region.name} cuisine`} 
+              class="object-cover h-full w-full"
+            />
+            <div class="absolute inset-0 flex items-center justify-center">
+              <h2 class="text-white font-bold tracking-wider lg:transform lg:-rotate-90 lg:group-hover:rotate-0 transition-all duration-500"
+                  style="font-size: clamp(1.5rem, 6vw, 3rem); text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">
+                {region.name}
+              </h2>
+            </div>
+          </a>
         </div>
-      </a>
-    </div>
-
-    <!-- Europe Column -->
-    <div 
-      x-data="{ expanded: false }"
-      @mouseenter="expanded = true"
-      @mouseleave="expanded = false"
-      :class="expanded ? 'w-[90%] transition-all duration-500' : 'w-1/4 transition-all duration-500'"
-      class="relative h-full overflow-hidden group"
-    >
-      <a href="/europe" class="block h-full w-full">
-        <!-- Image pour Europe -->
-        <img 
-          src="/europe1.jpg" 
-          alt="European cuisine" 
-          class="object-cover h-full w-full"
-        />
-        <div class="absolute inset-0 flex items-center justify-center">
-          <h2 class="text-white text-5xl font-bold tracking-wider transform -rotate-90 group-hover:rotate-0 transition-all duration-500">EUROPE</h2>
-        </div>
-      </a>
+      ))}
     </div>
   </main>
 </Layout>

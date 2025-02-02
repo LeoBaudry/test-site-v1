@@ -1,18 +1,130 @@
 ---
-// src/components/Header.astro
+// Importation des icônes
+import Logo from '../../public/logo.webp';
+import IconSearch from '../assets/icones/icon_search.svg';
 ---
 
-<header class="bg-beige p-4 shadow-md">
-    <div class="container mx-auto flex justify-between items-center">
-      <!-- Logo -->
-      <a href="/" class="text-2xl font-bold text-darkOrange">Yumly</a>
-  
-      <!-- Navigation -->
-      <nav class="space-x-4">
-        <a href="/asia" class="text-red hover:text-red-700">Asia</a>
-        <a href="/africa" class="text-green hover:text-green-700">Africa</a>
-        <a href="/latino" class="text-darkOrange hover:text-orange-700">Latino</a>
-        <a href="/europe" class="text-blue hover:text-blue-700">Europe</a>
-      </nav>
-    </div>
-  </header>
+<!-- Styles pour les animations (uniquement en dessous de 1024px) -->
+<style>
+  @media (max-width: 1024px) {
+    /* Animation du menu */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      opacity: 0;
+      background-color: rgba(249, 115, 22, 0.88); /* Orange-500 avec opacité */
+      backdrop-filter: blur(5px); /* Effet de flou */
+    }
+    .mobile-menu[aria-hidden="false"] {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    /* Animation des liens */
+    .mobile-menu ul li {
+      opacity: 0;
+      transform: translateX(20px);
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .mobile-menu[aria-hidden="false"] ul li {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Délai d'apparition des liens */
+    .mobile-menu ul li:nth-child(1) { transition-delay: 0.1s; }
+    .mobile-menu ul li:nth-child(2) { transition-delay: 0.2s; }
+    .mobile-menu ul li:nth-child(3) { transition-delay: 0.3s; }
+    .mobile-menu ul li:nth-child(4) { transition-delay: 0.4s; }
+    .mobile-menu ul li:nth-child(5) { transition-delay: 0.5s; }
+  }
+</style>
+
+<header class="px-6 py-2 fixed z-10 w-full flex items-stretch justify-between bg-white">
+  <!-- Logo -->
+  <div>
+    <a href="/">
+      <img src="/logo.webp" alt="Logo" class="h-12 w-auto" />
+    </a>
+  </div>
+
+  <!-- Menu et boutons -->
+  <div class="flex items-center gap-4 lg:flex-row-reverse">
+    <!-- Bouton de recherche -->
+    <button aria-label="Rechercher">
+      <IconSearch /> <!-- Ou utilisez <img src="/assets/icones/icon_search.svg" alt="Rechercher" class="h-6 w-6" /> -->
+    </button>
+
+    <!-- Bouton du menu mobile -->
+    <button
+      class="group h-4 w-6 relative z-20 flex flex-col justify-between *:block *:h-0.5 *:w-full *:bg-black *:aria-expanded:bg-white *:transition *:duration-300 lg:hidden"
+      id="menu-btn"
+      aria-label="Menu"
+      aria-controls="menu"
+      aria-expanded="false"
+    >
+      <span class="group-aria-expanded:translate-y-[7px] group-aria-expanded:rotate-45"></span>
+      <span class="group-aria-expanded:opacity-0"></span>
+      <span class="group-aria-expanded:-translate-y-[7px] group-aria-expanded:-rotate-45"></span>
+    </button>
+
+    <!-- Navigation -->
+    <nav
+      class="mobile-menu fixed z-10 inset-0 bg-orange-500 text-white text-2xl max-lg:aria-hidden:invisible visible max-lg:aria-hidden:opacity-0 opacity-100 transition lg:bg-transparent lg:relative lg:flex lg:items-center lg:text-sm lg:uppercase lg:font-bold lg:text-black"
+      id="menu"
+      aria-hidden="true"
+    >
+      <ul class="mt-[25vh] mx-16 lg:flex lg:m-0">
+        <!-- Asia -->   
+        <li>
+          <a class="block px-5 py-4 lg:py-8 hover:text-red-500 transition-colors duration-300" href="/asia">
+            Asia
+          </a>
+        </li>
+        <!-- Africa -->
+        <li>
+          <a class="block px-5 py-4 lg:py-8 hover:text-green-500 transition-colors duration-300" href="/africa">
+            Africa
+          </a>
+        </li>
+        <!-- Latino -->
+        <li>
+          <a class="block px-5 py-4 lg:py-8 hover:text-yellow-500 transition-colors duration-300" href="/latino">
+            Latino
+          </a>
+        </li>
+        <!-- Europe -->
+        <li>
+          <a class="block px-5 py-4 lg:py-8 hover:text-blue-500 transition-colors duration-300" href="/europe">
+            Europe
+          </a>
+        </li>
+        <!-- Contact -->
+        <li>
+          <a class="block px-5 py-4 lg:py-8 hover:text-indigo-500 transition-colors duration-300" href="/contact">
+            Contact
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Script pour gérer le menu mobile
+  const toggle = document.querySelector("#menu-btn");
+  const nav = document.querySelector("#menu");
+  const page = document.body;
+
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => {
+      const isOpen = toggle.ariaExpanded === "true";
+      const isClosed = !isOpen;
+      // Mise à jour des attributs ARIA pour accessibilité
+      toggle.ariaExpanded = String(isClosed);
+      nav.ariaHidden = String(isOpen);
+      page.classList.toggle("noscroll", isClosed);
+    });
+  }
+</script>

@@ -10,7 +10,7 @@ interface Props {
 const { title, description, image, ingredients, time } = Astro.props;
 ---
 
-<div class="bg-white rounded-lg shadow-md overflow-hidden">
+<div class="bg-white rounded-lg shadow-md overflow-hidden max-w-[400px] max-h-[500px]"> <!-- Taille maximale de la carte -->
   <img 
     src={image || "/placeholder.svg"} 
     alt={title}

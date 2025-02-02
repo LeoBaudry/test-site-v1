@@ -1,41 +1,51 @@
 ---
 import CategoryLayout from '../layouts/CategoryLayout.astro';
 import RecipeCard from '../components/RecipeCard.astro';
-import Header from '../components/Header.astro'; // Import du Header
 
 const ingredients = [
   {
-    name: "Gochugaru",
-    description: "Korean red pepper flakes",
-    image: "../public/Gochugaru.jpg"
+    name: "Harissa",
+    description: "North African chili paste",
+    image: "/images/ingredients/harissa.jpg"
+  },
+  {
+    name: "Plantains",
+    description: "Starchy fruit used in African cuisine",
+    image: "/images/ingredients/plantains.jpg"
   },
   // Ajoutez plus d'ingrédients...
 ];
 
 const recipes = [
   {
-    title: "Kimchi Jjigae",
-    description: "Spicy Korean stew with kimchi and tofu",
-    image: "../public/kimchi_jjigae.jpg",
-    ingredients: ["Kimchi", "Tofu", "Gochugaru", "Pork belly"],
-    time: "45 mins"
+    title: "Jollof Rice",
+    description: "Spicy one-pot rice dish",
+    image: "/images/recipes/jollof-rice.jpg",
+    ingredients: ["Rice", "Tomatoes", "Onions", "Peppers"],
+    time: "1 hour"
+  },
+  {
+    title: "Tagine",
+    description: "Slow-cooked stew with meat and vegetables",
+    image: "/images/recipes/tagine.jpg",
+    ingredients: ["Lamb", "Apricots", "Couscous", "Spices"],
+    time: "2 hours"
   },
   // Ajoutez plus de recettes...
 ];
 ---
 
 <CategoryLayout 
-  title="Asian Cuisine" 
-  category="asia" 
-  accentColor="bg-[#FF4B4B]"
-  footerImage="/images/footer/noodle-bowl.jpg"
+  title="African Cuisine" 
+  category="africa" 
+  accentColor="bg-[#FFA500]" 
+  footerImage="/images/footer/african-dish.jpg"
 >
-  <Header /> <!-- Utilisation du Header -->
   <section class="mb-16">
-    <h2 class="text-3xl font-bold mb-8">Essential Asian Ingredients</h2>
+    <h2 class="text-3xl font-bold mb-8">Essential African Ingredients</h2>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
       {ingredients.map(ingredient => (
-        <div class="bg-white rounded-lg shadow-md overflow-hidden max-w-[300px] max-h-[400px]"> <!-- Taille maximale de la carte -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
           <img 
             src={ingredient.image || "/placeholder.svg"} 
             alt={ingredient.name}
@@ -54,7 +64,7 @@ const recipes = [
     <h2 class="text-3xl font-bold mb-8">Featured Recipes</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       {recipes.map(recipe => (
-        <RecipeCard {...recipe} /> <!-- Pas besoin de spécifier la taille ici -->
+        <RecipeCard {...recipe} />
       ))}
     </div>
   </section>
